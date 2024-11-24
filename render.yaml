@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: fastapi-app
+    env: docker
+    region: oregon  # or choose another region
+    plan: free  # or choose a paid plan
+    branch: main  # or your default branch
+    dockerCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: PORT
+        value: 8080
+    healthCheckPath: /
+    numInstances: 1
