@@ -8,7 +8,8 @@ RUN pip install --no-cache-dir --upgrade -r /code/requirements.txt
 
 COPY ./app /code/app
 
-EXPOSE 80
+# Get the PORT environment variable
+ENV PORT=8080
 
-# FastAPI applications typically run with uvicorn
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "80"]
+# Use the $PORT variable in the CMD
+CMD ["sh", "-c", "uvicorn app.main:app --host 0.0.0.0 --port $PORT"]
