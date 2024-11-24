@@ -2,12 +2,15 @@ services:
   - type: web
     name: fastapi-app
     env: docker
-    region: oregon  # or choose another region
-    plan: free  # or choose a paid plan
-    branch: main  # or your default branch
+    region: oregon
+    plan: free
+    branch: main
     dockerCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
     envVars:
       - key: PORT
         value: 8080
+      - key: API_KEY
+        sync: false  # This makes it a secret environment variable
     healthCheckPath: /
     numInstances: 1
+    autoDeploy: true
